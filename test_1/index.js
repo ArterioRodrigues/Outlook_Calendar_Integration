@@ -1,4 +1,42 @@
 
+function Login(res){
+  var w = window.open("");
+  w.document.writeln(res);
+}
+
+window.onload = async () => {
+
+  const options = {
+    method : 'POST',
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+
+    client_id : 'e702843a-6531-4d42-9cc4-488e334c2779',
+    scope: '.default',
+    client_secret: 'j8Q8Q~Idmpl6WpahJ4RHSKkllepa6uuLyr4VJbkf',
+    grant_type : 'client_credentials'
+  }
+  await axios.post('https://login.microsoftonline.com/2a1907c3-592c-40cb-8a88-7f2d40bd937a/oauth2/authorize', options)
+    .then( (res) => log(res))
+  
+  const token = await axios.post('https://login.microsoftonline.com/2a1907c3-592c-40cb-8a88-7f2d40bd937a/oauth2/token', options);
+  
+
+
+  console.log(token)
+  console.log(authorization)
+  console.log("hey")
+}
+
+
+/*
 let API = 'https://graph.microsoft.com/v1.0//me/findMeetingTimes'
 let all_event_request = 'https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location'
 
@@ -85,3 +123,4 @@ function callMSGraph(endpoint, token, callback) {
 window.onload = async () => {
     callMSGraph(ENDPOINT_FindMeetingTimes, TOKEN, CALLBACK)
 }
+*/
